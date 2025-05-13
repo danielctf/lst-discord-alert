@@ -1,4 +1,4 @@
-package org.example
+package org.example.discord
 
 data class DiscordMessage(
     val embeds: List<Embed>,

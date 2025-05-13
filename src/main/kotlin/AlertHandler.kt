@@ -2,6 +2,11 @@ package org.example
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
+import org.example.discord.DiscordAlert
+import org.example.network.Player
+import org.example.network.PlayersRepository
+import org.example.network.Server
+import org.example.network.ServerRepository
 
 class AlertHandler {
 
@@ -51,7 +56,7 @@ class AlertHandler {
             lastAlertSent = getCurrentTime()
             canAlertWinner = false
             discordAlert.sendWinnerAlert(
-                winner = winner,
+                winnerName = winner.name,
                 playersList = playersList,
                 mapName = server.mapName
             )
