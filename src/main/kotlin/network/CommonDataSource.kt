@@ -1,4 +1,4 @@
-package org.example
+package org.example.network
 
 import org.example.ConfigurableConstants.IP
 import org.example.ConfigurableConstants.PORT
@@ -41,16 +41,6 @@ class CommonDataSource {
         send(packet)
     }
 
-    private fun parseServerResponse(
-        byteArray: ByteArray,
-        packetLength: Int
-    ): List<String> = StringBuffer().apply {
-        append(
-            String(
-                byteArray,
-                0,
-                packetLength
-            )
-        )
-    }.split("\\")
+    private fun parseServerResponse(byteArray: ByteArray, packetLength: Int): List<String> =
+        String(byteArray, 0, packetLength).split("\\")
 }
