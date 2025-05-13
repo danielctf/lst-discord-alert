@@ -3,10 +3,10 @@ package org.example
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.example.discord.DiscordAlert
-import org.example.network.Player
-import org.example.network.PlayersRepository
-import org.example.network.Server
-import org.example.network.ServerRepository
+import org.example.ut.Player
+import org.example.ut.PlayersRepository
+import org.example.ut.Server
+import org.example.ut.ServerRepository
 
 class AlertHandler {
 

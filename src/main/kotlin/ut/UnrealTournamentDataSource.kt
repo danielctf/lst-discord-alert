@@ -1,4 +1,4 @@
-package org.example.network
+package org.example.ut
 
 import org.example.ConfigurableConstants.IP
 import org.example.ConfigurableConstants.PORT
@@ -6,7 +6,7 @@ import java.net.DatagramPacket
 import java.net.DatagramSocket
 import java.net.InetAddress
 
-class CommonDataSource {
+class UnrealTournamentDataSource {
 
     private val status = "\\status\\"
     private val players = "\\players\\"

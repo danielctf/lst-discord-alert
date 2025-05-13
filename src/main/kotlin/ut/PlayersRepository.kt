@@ -1,8 +1,8 @@
-package org.example.network
+package org.example.ut
 
 class PlayersRepository {
 
-    private val dataSource = CommonDataSource()
+    private val dataSource = UnrealTournamentDataSource()
 
     fun getPlayersList(): List<Player> {
         val playersRaw = dataSource.getPlayersRaw()

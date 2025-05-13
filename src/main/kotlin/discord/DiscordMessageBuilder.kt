@@ -1,6 +1,6 @@
 package org.example.discord
 
-import org.example.network.Player
+import org.example.ut.Player
 
 class DiscordMessageBuilder {
 

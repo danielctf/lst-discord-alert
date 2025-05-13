@@ -1,4 +1,4 @@
-package org.example.network
+package org.example.ut
 
 data class Player(
     val name: String,
