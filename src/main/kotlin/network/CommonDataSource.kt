@@ -8,9 +8,17 @@ import java.net.InetAddress
 
 class CommonDataSource {
 
-    fun getServerRaw(): List<String> = getRaw("\\status\\")
+    private val status = "\\status\\"
+    private val players = "\\players\\"
 
-    fun getPlayersRaw(): List<String> = getRaw("\\players\\")
+    private val map = mapOf(
+        status to status.toByteArray(),
+        players to players.toByteArray(),
+    )
+
+    fun getServerRaw(): List<String> = getRaw(status)
+
+    fun getPlayersRaw(): List<String> = getRaw(players)
 
     private fun getRaw(type: String): List<String> {
         val packet = getPacket(type)
@@ -33,7 +41,8 @@ class CommonDataSource {
         InetAddress.getByName(IP),
         PORT
     ).apply {
-        setData(type.toByteArray())
+        // Save some computing time by already having the byte array
+        setData(map[type])
     }
 
     private fun getSocket(packet: DatagramPacket) = DatagramSocket().apply {
