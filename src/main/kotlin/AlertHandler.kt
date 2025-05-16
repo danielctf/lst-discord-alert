@@ -4,18 +4,16 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.example.discord.DiscordAlert
 import org.example.ut.Player
-import org.example.ut.PlayersRepository
 import org.example.ut.Server
-import org.example.ut.ServerRepository
+import org.example.ut.UnrealTournamentRepository
 
 class AlertHandler {
 
-    private val serverRepository = ServerRepository()
-    private val playersRepository = PlayersRepository()
+    private val repository = UnrealTournamentRepository()
     private val discordAlert = DiscordAlert()
 
     private var lastAlertSent = 0L
-    private var canAlertWinner = true
+    private var canSendWinnerAlert = true
 
     fun start() {
         runBlocking {
@@ -32,29 +30,33 @@ class AlertHandler {
     }
 
     private fun sendAlerts() {
-        val server = serverRepository.getServer()
-        val playersList = playersRepository.getPlayersList()
+        val server = repository.getServer()
+        val playersList = repository.getPlayersList()
 
         sendPlayersInServerAlert(playersList)
         sendWinnerAlert(playersList, server)
     }
 
     private fun sendPlayersInServerAlert(playersList: List<Player>) {
-        if (playersList.size >= 2 && getCurrentTime() - lastAlertSent >= MIN_TIME_BETWEEN_ALERTS) {
-            lastAlertSent = getCurrentTime()
-            discordAlert.sendPlayersInServerAlert(playersList)
+        if (!canSendPlayersInServerAlert(playersList)) {
+            return
         }
+        lastAlertSent = getCurrentTime()
+        discordAlert.sendPlayersInServerAlert(playersList)
     }
 
-    private fun getCurrentTime() = System.currentTimeMillis()
+    private fun canSendPlayersInServerAlert(playersList: List<Player>): Boolean =
+        getCurrentTime() - lastAlertSent >= MIN_TIME_BETWEEN_ALERTS && playersList.size >= 2
+
+    private fun getCurrentTime(): Long = System.currentTimeMillis()
 
     private fun sendWinnerAlert(playersList: List<Player>, server: Server) {
-        if (!canAlertWinner(playersList, server)) {
+        if (!canSendWinnerAlert(playersList, server)) {
             return
         }
         playersList.find { it.frags == server.fragLimit }?.let { winner ->
             lastAlertSent = getCurrentTime()
-            canAlertWinner = false
+            canSendWinnerAlert = false
             discordAlert.sendWinnerAlert(
                 winnerName = winner.name,
                 playersList = playersList,
@@ -63,11 +65,11 @@ class AlertHandler {
         }
     }
 
-    private fun canAlertWinner(playersList: List<Player>, server: Server): Boolean {
+    private fun canSendWinnerAlert(playersList: List<Player>, server: Server): Boolean {
         if (!playersList.any { it.frags == server.fragLimit }) {
-            canAlertWinner = true
+            canSendWinnerAlert = true
         }
-        return canAlertWinner && server.isDeathMatch
+        return canSendWinnerAlert && server.isDeathMatch
     }
 
     private companion object {
