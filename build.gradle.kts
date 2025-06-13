@@ -3,8 +3,8 @@ plugins {
     application
 }
 
-group = "org.example"
-version = "1.0-SNAPSHOT"
+group = "org.agroapp"
+version = "1.0"
 
 repositories {
     mavenCentral()
@@ -24,7 +24,7 @@ kotlin {
 }
 
 application {
-    mainClass.set("org.example.MainKt")
+    mainClass.set("org.agroapp.MainKt")
 }
 
 tasks.register<Jar>("fatJar") {

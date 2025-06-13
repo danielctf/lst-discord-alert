@@ -1,4 +1,4 @@
-package org.example.ut
+package org.agroapp.ut
 
 data class Server(
     val mapName: String,

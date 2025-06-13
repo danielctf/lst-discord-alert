@@ -1,6 +1,6 @@
-package org.example
+package org.agroapp.main
 
-object ConfigurableConstants {
+object ServerConstants {
 
     const val IP = "154.223.16.236"
     const val PORT = 7778

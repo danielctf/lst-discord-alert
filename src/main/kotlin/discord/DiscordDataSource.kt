@@ -1,7 +1,7 @@
-package org.example.discord
+package org.agroapp.discord
 
 import com.google.gson.Gson
-import org.example.ConfigurableConstants.DISCORD_WEBHOOK_URL
+import org.agroapp.main.ServerConstants.DISCORD_WEBHOOK_URL
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL

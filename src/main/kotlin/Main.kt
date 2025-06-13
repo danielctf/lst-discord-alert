@@ -1,5 +1,7 @@
-package org.example
+package org.agroapp
+
+import org.agroapp.main.LoopHandler
 
 fun main() {
-    AlertHandler().start()
+    LoopHandler().start()
 }
