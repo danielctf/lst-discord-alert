@@ -1,14 +1,14 @@
-package org.example.discord
+package org.agroapp.discord
 
 data class DiscordMessage(
-    val embeds: List<Embed>,
+    val embeds: List<Embed>
 )
 
 data class Embed(
     val title: String? = null,
     val color: Long,
     val fields: List<Field>? = null,
-    val description: String? = null,
+    val description: String? = null
 )
 
 data class Field(

@@ -1,4 +1,4 @@
-package org.example.ut
+package org.agroapp.ut
 
 class UnrealTournamentRepository {
 
@@ -14,7 +14,7 @@ class UnrealTournamentRepository {
         return Server(
             mapName = serverRaw[mapNameIndex + 1],
             fragLimit = serverRaw[fragLimitIndex + 1],
-            isDeathMatch = serverRaw[gameTypeIndex + 1] == "DeathMatchPlus",
+            isDeathMatch = serverRaw[gameTypeIndex + 1] == "DeathMatchPlus"
         )
     }
 

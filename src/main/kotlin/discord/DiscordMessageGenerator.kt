@@ -1,19 +1,20 @@
-package org.example.discord
+package org.agroapp.discord
 
-import org.example.ut.Player
+import org.agroapp.ut.Player
+import org.agroapp.ut.Server
 
-class DiscordMessageBuilder {
+class DiscordMessageGenerator {
 
-    fun getWinnerMessage(
-        winnerName: String,
+    fun generateWinnerMessage(
+        winner: Player,
         playersList: List<Player>,
-        mapName: String
+        server: Server
     ): DiscordMessage {
         val sortedPlayersList = playersList.sortedByDescending { it.frags.toIntOrNull() }
         return DiscordMessage(
             embeds = listOf(
                 Embed(
-                    title = "\uD83C\uDFC6 $winnerName wins the match in $mapName !",
+                    title = "\uD83C\uDFC6 ${winner.name} wins the match in ${server.mapName} !",
                     color = 16766720,
                     fields = listOf(
                         Field(
@@ -34,7 +35,7 @@ class DiscordMessageBuilder {
         )
     }
 
-    fun getPlayersInServerMessage(playersList: List<Player>): DiscordMessage {
+    fun generatePlayersMessage(playersList: List<Player>): DiscordMessage {
         val playersString = playersList.joinToString(" and ") { it.name }
         return DiscordMessage(
             embeds = listOf(

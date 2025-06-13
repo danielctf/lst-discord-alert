@@ -1,24 +1,21 @@
-package org.example.ut
+package org.agroapp.ut
 
-import org.example.ConfigurableConstants.IP
-import org.example.ConfigurableConstants.PORT
+import org.agroapp.main.ServerConstants.IP
+import org.agroapp.main.ServerConstants.PORT
 import java.net.DatagramPacket
 import java.net.DatagramSocket
 import java.net.InetAddress
 
 class UnrealTournamentDataSource {
 
-    private val status = "\\status\\"
-    private val players = "\\players\\"
-
     private val map = mapOf(
-        status to status.toByteArray(),
-        players to players.toByteArray(),
+        STATUS to STATUS.toByteArray(),
+        PLAYERS to PLAYERS.toByteArray()
     )
 
-    fun getServerRaw(): List<String> = getRaw(status)
+    fun getServerRaw(): List<String> = getRaw(STATUS)
 
-    fun getPlayersRaw(): List<String> = getRaw(players)
+    fun getPlayersRaw(): List<String> = getRaw(PLAYERS)
 
     private fun getRaw(type: String): List<String> {
         val packet = getPacket(type)
@@ -41,7 +38,6 @@ class UnrealTournamentDataSource {
         InetAddress.getByName(IP),
         PORT
     ).apply {
-        // Save some computing time by already having the byte array
         setData(map[type])
     }
 
@@ -52,4 +48,9 @@ class UnrealTournamentDataSource {
 
     private fun parseServerResponse(byteArray: ByteArray, packetLength: Int): List<String> =
         String(byteArray, 0, packetLength).split("\\")
+
+    private companion object {
+        const val STATUS = "\\status\\"
+        const val PLAYERS = "\\players\\"
+    }
 }
