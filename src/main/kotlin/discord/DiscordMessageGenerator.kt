@@ -14,7 +14,7 @@ class DiscordMessageGenerator {
         return DiscordMessage(
             embeds = listOf(
                 Embed(
-                    title = "\uD83C\uDFC6 ${winner.name} wins the match in ${server.mapName} !",
+                    title = "\uD83C\uDFC6 ${winner.name} wins the match on ${server.mapName} !",
                     color = 16766720,
                     fields = listOf(
                         Field(
